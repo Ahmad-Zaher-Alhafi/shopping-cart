@@ -13,7 +13,7 @@ function Product({ imgUrl, name, price }) {
 Product.propTypes = {
   imgUrl: propTypes.string,
   name: propTypes.string,
-  price: propTypes.string,
+  price: propTypes.number,
 };
 
 export default Product;
