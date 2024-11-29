@@ -1,0 +1,12 @@
+.product {
+  max-width: 200px;
+  height: auto;
+  background-color: lightgray;
+  padding: 20px;
+}
+
+img {
+  width: 100%;
+  height: auto;
+  border: 2px solid;
+}

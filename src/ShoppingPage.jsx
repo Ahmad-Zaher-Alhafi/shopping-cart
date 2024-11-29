@@ -1,17 +1,32 @@
-import { useEffect, useState } from "react";
-import NavgationBar from "./NavigationBar";
+import { useEffect } from "react";
 import Product from "./Product";
+import styles from "./shoppingPage.module.css";
+import propTypes from "prop-types";
 
-function ShoppingPage() {
-  const [products, setProducts] = useState([]);
-
+function ShoppingPage({ products, setProducts }) {
   useEffect(() => {
+    if (products.length > 0) return;
+
     fetchProducts()
       .then((result) => {
         setProducts(result);
       })
       .catch((reject) => console.error("Can not fetch products", reject));
   }, []);
+
+  function addToCart(key) {
+    const newProducts = products.map((product) => {
+      if (product.key === key) {
+        product.inCart = true;
+      }
+
+      return product;
+    });
+
+    setProducts(newProducts);
+
+    console.log(newProducts);
+  }
 
   async function fetchProducts() {
     try {
@@ -30,6 +45,7 @@ function ShoppingPage() {
         imgUrl: product.image,
         name: product.title,
         price: product.price,
+        inCart: false,
         key: crypto.randomUUID(),
       }));
 
@@ -41,21 +57,30 @@ function ShoppingPage() {
 
   return (
     <div className="shoppingPage">
-      <NavgationBar></NavgationBar>
       <h1>Hey shopping page!</h1>
 
-      {products.map((product) => {
-        return (
-          <Product
-            imgUrl={product.imgUrl}
-            name={product.name}
-            price={product.price}
-            key={product.key}
-          ></Product>
-        );
-      })}
+      <div className={styles.products}>
+        {products.map((product) => {
+          return (
+            <Product
+              imgUrl={product.imgUrl}
+              name={product.name}
+              price={product.price}
+              inCart={product.inCart}
+              addToCart={addToCart}
+              productKey={product.key}
+              key={product.key}
+            ></Product>
+          );
+        })}
+      </div>
     </div>
   );
 }
+
+ShoppingPage.propTypes = {
+  products: propTypes.array,
+  setProducts: propTypes.func,
+};
 
 export default ShoppingPage;

@@ -1,17 +1,16 @@
 import ErrorPage from "./ErrorPage";
 import HomePage from "./HomePage";
-import ShoppingPage from "./ShoppingPage";
 
 const routes = [
   {
-    path: "/",
+    path: "/homePage",
     element: <HomePage></HomePage>,
     errorElement: <ErrorPage></ErrorPage>,
   },
 
   {
-    path: "shoppingPage",
-    element: <ShoppingPage></ShoppingPage>,
+    path: "/homePage/:name",
+    element: <HomePage></HomePage>,
   },
 ];
 

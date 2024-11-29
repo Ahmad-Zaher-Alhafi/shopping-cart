@@ -5,11 +5,11 @@ function NavgationBar() {
     <nav className="navBar">
       <ul>
         <li>
-          <Link to={"/"}>Home page</Link>
+          <Link to={"/homePage"}>Home page</Link>
         </li>
 
         <li>
-          <Link to={"/shoppingPage"}>Shopping page</Link>
+          <Link to={"/homePage/shoppingPage"}>Shopping page</Link>
         </li>
       </ul>
     </nav>
